@@ -1,0 +1,47 @@
+BUILD: rpm-ostree-2020.10-1.fc34 [1657648]
+State: COMPLETE
+Built by: walters
+Source: git+https://src.fedoraproject.org/rpms/rpm-ostree.git#89773b3c31bad5ea9db7833225520b4238862d27
+Volume: DEFAULT
+Task: 57269515 build (rawhide, /rpms/rpm-ostree.git:89773b3c31bad5ea9db7833225520b4238862d27)
+Finished: Fri, 11 Dec 2020 19:31:15 UTC
+Tags: f34
+Extra: {'source': {'original_url': 'git+https://src.fedoraproject.org/rpms/rpm-ostree.git#89773b3c31bad5ea9db7833225520b4238862d27'}}
+RPMs:
+/mnt/koji/packages/rpm-ostree/2020.10/1.fc34/src/rpm-ostree-2020.10-1.fc34.src.rpm	Signatures: 45719a39
+/mnt/koji/packages/rpm-ostree/2020.10/1.fc34/armv7hl/rpm-ostree-libs-debuginfo-2020.10-1.fc34.armv7hl.rpm	Signatures: 45719a39
+/mnt/koji/packages/rpm-ostree/2020.10/1.fc34/armv7hl/rpm-ostree-libs-2020.10-1.fc34.armv7hl.rpm	Signatures: 45719a39
+/mnt/koji/packages/rpm-ostree/2020.10/1.fc34/armv7hl/rpm-ostree-debuginfo-2020.10-1.fc34.armv7hl.rpm	Signatures: 45719a39
+/mnt/koji/packages/rpm-ostree/2020.10/1.fc34/armv7hl/rpm-ostree-debugsource-2020.10-1.fc34.armv7hl.rpm	Signatures: 45719a39
+/mnt/koji/packages/rpm-ostree/2020.10/1.fc34/armv7hl/rpm-ostree-devel-2020.10-1.fc34.armv7hl.rpm	Signatures: 45719a39
+/mnt/koji/packages/rpm-ostree/2020.10/1.fc34/armv7hl/rpm-ostree-2020.10-1.fc34.armv7hl.rpm	Signatures: 45719a39
+/mnt/koji/packages/rpm-ostree/2020.10/1.fc34/i686/rpm-ostree-debuginfo-2020.10-1.fc34.i686.rpm	Signatures: 45719a39
+/mnt/koji/packages/rpm-ostree/2020.10/1.fc34/i686/rpm-ostree-libs-debuginfo-2020.10-1.fc34.i686.rpm	Signatures: 45719a39
+/mnt/koji/packages/rpm-ostree/2020.10/1.fc34/i686/rpm-ostree-2020.10-1.fc34.i686.rpm	Signatures: 45719a39
+/mnt/koji/packages/rpm-ostree/2020.10/1.fc34/i686/rpm-ostree-debugsource-2020.10-1.fc34.i686.rpm	Signatures: 45719a39
+/mnt/koji/packages/rpm-ostree/2020.10/1.fc34/i686/rpm-ostree-libs-2020.10-1.fc34.i686.rpm	Signatures: 45719a39
+/mnt/koji/packages/rpm-ostree/2020.10/1.fc34/i686/rpm-ostree-devel-2020.10-1.fc34.i686.rpm	Signatures: 45719a39
+/mnt/koji/packages/rpm-ostree/2020.10/1.fc34/x86_64/rpm-ostree-debuginfo-2020.10-1.fc34.x86_64.rpm	Signatures: 45719a39
+/mnt/koji/packages/rpm-ostree/2020.10/1.fc34/x86_64/rpm-ostree-devel-2020.10-1.fc34.x86_64.rpm	Signatures: 45719a39
+/mnt/koji/packages/rpm-ostree/2020.10/1.fc34/x86_64/rpm-ostree-libs-debuginfo-2020.10-1.fc34.x86_64.rpm	Signatures: 45719a39
+/mnt/koji/packages/rpm-ostree/2020.10/1.fc34/x86_64/rpm-ostree-libs-2020.10-1.fc34.x86_64.rpm	Signatures: 45719a39
+/mnt/koji/packages/rpm-ostree/2020.10/1.fc34/x86_64/rpm-ostree-2020.10-1.fc34.x86_64.rpm	Signatures: 45719a39
+/mnt/koji/packages/rpm-ostree/2020.10/1.fc34/x86_64/rpm-ostree-debugsource-2020.10-1.fc34.x86_64.rpm	Signatures: 45719a39
+/mnt/koji/packages/rpm-ostree/2020.10/1.fc34/aarch64/rpm-ostree-2020.10-1.fc34.aarch64.rpm	Signatures: 45719a39
+/mnt/koji/packages/rpm-ostree/2020.10/1.fc34/aarch64/rpm-ostree-libs-2020.10-1.fc34.aarch64.rpm	Signatures: 45719a39
+/mnt/koji/packages/rpm-ostree/2020.10/1.fc34/aarch64/rpm-ostree-debuginfo-2020.10-1.fc34.aarch64.rpm	Signatures: 45719a39
+/mnt/koji/packages/rpm-ostree/2020.10/1.fc34/aarch64/rpm-ostree-devel-2020.10-1.fc34.aarch64.rpm	Signatures: 45719a39
+/mnt/koji/packages/rpm-ostree/2020.10/1.fc34/aarch64/rpm-ostree-debugsource-2020.10-1.fc34.aarch64.rpm	Signatures: 45719a39
+/mnt/koji/packages/rpm-ostree/2020.10/1.fc34/aarch64/rpm-ostree-libs-debuginfo-2020.10-1.fc34.aarch64.rpm	Signatures: 45719a39
+/mnt/koji/packages/rpm-ostree/2020.10/1.fc34/ppc64le/rpm-ostree-debuginfo-2020.10-1.fc34.ppc64le.rpm	Signatures: 45719a39
+/mnt/koji/packages/rpm-ostree/2020.10/1.fc34/ppc64le/rpm-ostree-libs-debuginfo-2020.10-1.fc34.ppc64le.rpm	Signatures: 45719a39
+/mnt/koji/packages/rpm-ostree/2020.10/1.fc34/ppc64le/rpm-ostree-devel-2020.10-1.fc34.ppc64le.rpm	Signatures: 45719a39
+/mnt/koji/packages/rpm-ostree/2020.10/1.fc34/ppc64le/rpm-ostree-libs-2020.10-1.fc34.ppc64le.rpm	Signatures: 45719a39
+/mnt/koji/packages/rpm-ostree/2020.10/1.fc34/ppc64le/rpm-ostree-2020.10-1.fc34.ppc64le.rpm	Signatures: 45719a39
+/mnt/koji/packages/rpm-ostree/2020.10/1.fc34/ppc64le/rpm-ostree-debugsource-2020.10-1.fc34.ppc64le.rpm	Signatures: 45719a39
+/mnt/koji/packages/rpm-ostree/2020.10/1.fc34/s390x/rpm-ostree-2020.10-1.fc34.s390x.rpm	Signatures: 45719a39
+/mnt/koji/packages/rpm-ostree/2020.10/1.fc34/s390x/rpm-ostree-devel-2020.10-1.fc34.s390x.rpm	Signatures: 45719a39
+/mnt/koji/packages/rpm-ostree/2020.10/1.fc34/s390x/rpm-ostree-debuginfo-2020.10-1.fc34.s390x.rpm	Signatures: 45719a39
+/mnt/koji/packages/rpm-ostree/2020.10/1.fc34/s390x/rpm-ostree-debugsource-2020.10-1.fc34.s390x.rpm	Signatures: 45719a39
+/mnt/koji/packages/rpm-ostree/2020.10/1.fc34/s390x/rpm-ostree-libs-debuginfo-2020.10-1.fc34.s390x.rpm	Signatures: 45719a39
+/mnt/koji/packages/rpm-ostree/2020.10/1.fc34/s390x/rpm-ostree-libs-2020.10-1.fc34.s390x.rpm	Signatures: 45719a39

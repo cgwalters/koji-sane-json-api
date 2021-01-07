@@ -8,6 +8,9 @@ mod koji;
 async fn buildinfo(path: web::Path<(String,)>) -> Result<HttpResponse> {
     let buildid = path.into_inner().0;
     let info = actix_threadpool::run(move || koji::get_koji_build(&buildid)).await;
+    if let Err(ref e) = info {
+        eprintln!("Failed to get koji build: {}", e);
+    }
     let info = info.map_err(ErrorInternalServerError)?;
     Ok(HttpResponse::Ok().json(info))
 }

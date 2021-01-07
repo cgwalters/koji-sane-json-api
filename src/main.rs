@@ -1,6 +1,6 @@
+use actix_web::error::ErrorInternalServerError;
 use actix_web::Result;
 use actix_web::{get, web, App, HttpResponse, HttpServer};
-use actix_web::error::ErrorInternalServerError;
 
 mod koji;
 
@@ -14,11 +14,8 @@ async fn buildinfo(path: web::Path<(String,)>) -> Result<HttpResponse> {
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
-    HttpServer::new(|| {
-        App::new()
-            .service(buildinfo)
-    })
-    .bind("127.0.0.1:8080")?
-    .run()
-    .await
+    HttpServer::new(|| App::new().service(buildinfo))
+        .bind("127.0.0.1:8080")?
+        .run()
+        .await
 }

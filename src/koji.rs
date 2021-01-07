@@ -1,16 +1,16 @@
 use std::collections::BTreeMap;
-use std::process::Command;
 use std::path::Path;
+use std::process::Command;
 
+use anyhow::{bail, Result};
 use lazy_static::lazy_static;
-use anyhow::{Result, bail};
 use regex::Regex;
 use serde_derive::{Deserialize, Serialize};
 
 const KOJIPKGS_URL: &str = "https://kojipkgs.fedoraproject.org/packages";
 
 #[derive(Default, Deserialize, Serialize)]
-#[serde(rename_all="kebab-case")]
+#[serde(rename_all = "kebab-case")]
 pub(crate) struct KojiBuildInfo {
     nvr: String,
     id: u64,
@@ -44,10 +44,7 @@ fn split_nvr(pkg: &str) -> Result<(&str, &str, &str)> {
 
 fn get_kojipkgs_url_prefix(buildid: &str) -> Result<String> {
     let (name, version, release) = split_nvr(buildid)?;
-    Ok(format!(
-        "{}/{}/{}/{}",
-        KOJIPKGS_URL, name, version, release
-    ))
+    Ok(format!("{}/{}/{}/{}", KOJIPKGS_URL, name, version, release))
 }
 
 pub(crate) fn validate_buildid(s: &str) -> Result<()> {
@@ -62,7 +59,7 @@ pub(crate) fn validate_buildid(s: &str) -> Result<()> {
             if !c.is_ascii_alphanumeric() {
                 bail!("Invalid alphanumeric character {} in buildid", c);
             }
-        },
+        }
         None => {
             bail!("Invalid empty buildid");
         }
@@ -81,10 +78,20 @@ fn scrape_koji_cli(output: &str) -> Result<KojiBuildInfo> {
     for line in output.lines() {
         if in_rpms {
             let p = Path::new(line.split_whitespace().next().expect("split"));
-            let name = p.file_name().ok_or_else(|| anyhow::anyhow!("Missing RPM name"))?;
-            let name = name.to_str().ok_or_else(|| anyhow::anyhow!("Invalid RPM name"))?;
-            let arch = p.parent().map(|p| p.file_name()).flatten().ok_or_else(|| anyhow::anyhow!("Missing RPM arch"))?;
-            let arch = arch.to_str().ok_or_else(|| anyhow::anyhow!("Invalid RPM arch"))?;
+            let name = p
+                .file_name()
+                .ok_or_else(|| anyhow::anyhow!("Missing RPM name"))?;
+            let name = name
+                .to_str()
+                .ok_or_else(|| anyhow::anyhow!("Invalid RPM name"))?;
+            let arch = p
+                .parent()
+                .map(|p| p.file_name())
+                .flatten()
+                .ok_or_else(|| anyhow::anyhow!("Missing RPM arch"))?;
+            let arch = arch
+                .to_str()
+                .ok_or_else(|| anyhow::anyhow!("Invalid RPM arch"))?;
 
             let v = r.rpms.entry(arch.to_string()).or_default();
             v.push(name.to_string());
@@ -147,7 +154,10 @@ mod test {
         assert_eq!(r.id, 1657648);
         assert_eq!(r.rpms.len(), 7);
         assert_eq!(r.rpms["src"][0], "rpm-ostree-2020.10-1.fc34.src.rpm");
-        assert_eq!(r.rpms["x86_64"][2], "rpm-ostree-libs-debuginfo-2020.10-1.fc34.x86_64.rpm");
+        assert_eq!(
+            r.rpms["x86_64"][2],
+            "rpm-ostree-libs-debuginfo-2020.10-1.fc34.x86_64.rpm"
+        );
         Ok(())
     }
 }

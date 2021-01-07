@@ -7,11 +7,47 @@ use anyhow::{Result, bail};
 use regex::Regex;
 use serde_derive::{Deserialize, Serialize};
 
+const KOJIPKGS_URL: &str = "https://kojipkgs.fedoraproject.org/packages";
+
 #[derive(Default, Deserialize, Serialize)]
+#[serde(rename_all="kebab-case")]
 pub(crate) struct KojiBuildInfo {
     nvr: String,
     id: u64,
+    kojipkgs_url_prefix: String,
     rpms: BTreeMap<String, Vec<String>>,
+}
+
+// This likely isn't right, need to use something more like hy_split_nevra() maybe or reimplement in Rust
+fn split_nvr(pkg: &str) -> Result<(&str, &str, &str)> {
+    let idx = pkg
+        .rfind('-')
+        .ok_or_else(|| anyhow::anyhow!("Invalid buildid, missing a '-'"))?;
+    let (pkgver, rest) = pkg.split_at(idx);
+    let rest = rest.strip_prefix("-").expect("-");
+    let idx = pkgver
+        .rfind('-')
+        .ok_or_else(|| anyhow::anyhow!("Invalid buildid, missing pkgver '-'"))?;
+    let (pkgname, version) = pkgver.split_at(idx);
+    let version = version.strip_prefix("-").expect("-");
+    if pkgname.is_empty() {
+        anyhow::bail!("Invalid buildid with empty name");
+    }
+    if version.is_empty() {
+        anyhow::bail!("Invalid buildid with empty version");
+    }
+    if rest.is_empty() {
+        anyhow::bail!("Invalid buildid with empty release");
+    }
+    Ok((pkgname, version, rest))
+}
+
+fn get_kojipkgs_url_prefix(buildid: &str) -> Result<String> {
+    let (name, version, release) = split_nvr(buildid)?;
+    Ok(format!(
+        "{}/{}/{}/{}",
+        KOJIPKGS_URL, name, version, release
+    ))
 }
 
 pub(crate) fn validate_buildid(s: &str) -> Result<()> {
@@ -40,6 +76,7 @@ lazy_static! {
 
 fn scrape_koji_cli(output: &str) -> Result<KojiBuildInfo> {
     let mut r: KojiBuildInfo = Default::default();
+    // Convenience so the client doesn't have to hardcode this
     let mut in_rpms = false;
     for line in output.lines() {
         if in_rpms {
@@ -64,6 +101,7 @@ fn scrape_koji_cli(output: &str) -> Result<KojiBuildInfo> {
     if !in_rpms {
         bail!("Failed to find RPMs");
     }
+    r.kojipkgs_url_prefix = get_kojipkgs_url_prefix(&r.nvr)?;
     Ok(r)
 }
 

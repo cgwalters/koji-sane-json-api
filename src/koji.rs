@@ -1,4 +1,5 @@
 use std::collections::BTreeMap;
+use std::io::Write as IoWrite;
 use std::path::Path;
 use std::process::Command;
 
@@ -117,9 +118,9 @@ pub(crate) fn get_koji_build(buildid: &str) -> Result<KojiBuildInfo> {
     let c = Command::new("koji")
         .arg("buildinfo")
         .arg(buildid)
-        .stdout(std::process::Stdio::piped())
         .output()?;
     if !c.status.success() {
+        let _ = std::io::stderr().write_all(&c.stderr);
         anyhow::bail!("koji failed");
     }
     scrape_koji_cli(std::str::from_utf8(&c.stdout)?)

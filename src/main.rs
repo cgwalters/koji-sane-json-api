@@ -12,9 +12,19 @@ async fn buildinfo(path: web::Path<(String,)>) -> Result<HttpResponse> {
     Ok(HttpResponse::Ok().json(info))
 }
 
+#[get("/health")]
+async fn health() -> HttpResponse {
+    HttpResponse::Ok().body("ok")
+}
+
+#[get("/")]
+async fn index() -> HttpResponse {
+    HttpResponse::Ok().body("https://github.com/cgwalters/koji-sane-json-api")
+}
+
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
-    HttpServer::new(|| App::new().service(buildinfo))
+    HttpServer::new(|| App::new().service(buildinfo).service(health).service(index))
         .bind("127.0.0.1:8080")?
         .run()
         .await

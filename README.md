@@ -2,4 +2,8 @@
 
 See https://github.com/fedora-infra/bodhi/issues/4175
 
+## Example usage:
 
+```
+$ curl -v -L https://$endpoint/buildinfo/NetworkManager-1.26.4-1.fc33
+```
